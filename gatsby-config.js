@@ -1,12 +1,35 @@
 module.exports = {
   siteMetadata: {
     title: "はじめてのGatsby Site",
-    author: "Reffect",
+    author: "John Doe",
     category: ["Laravel", "Vue.js", "React"],
     user: { name: "John Doe", email: "john@example.com" },
   },
   /* Your site config here */
   plugins: [
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          `gatsby-remark-relative-images`,
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 700,
+            },
+          },
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -14,6 +37,5 @@ module.exports = {
         path: `${__dirname}/src/`,
       },
     },
-    "gatsby-transformer-remark",
   ],
 }
